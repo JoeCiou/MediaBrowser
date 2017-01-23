@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "MediaBrowser.setupItemView() -&gt; ():MediaBrowser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "mediaItems">
+            </PersistentString>
+            <PersistentString
+               value = "self">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MediaBrowser.scrollViewDidScroll(UIScrollView) -&gt; ():MediaBrowser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "mediaItemViews[0].frame">
+            </PersistentString>
+            <PersistentString
+               value = "scrollView.frame">
+            </PersistentString>
+            <PersistentString
+               value = "(scrollView.contentOffset.x - scrollView.frame.width / 2) / scrollView.frame.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MediaItemView.player.didset:MediaBrowser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "bounds">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MediaBrowser.scrollViewWillBeginDragging(UIScrollView) -&gt; ():MediaBrowser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "contentView.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MediaItemView.load() -&gt; ():MediaBrowser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "player?.currentItem">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MediaItemView.(load() -&gt; ()).(closure #1):MediaBrowser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "player?.currentItem.status">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MediaItemView.setupView() -&gt; ():MediaBrowser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "bounds">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "VideoItem.init(image : UIImage, videoUrl : URL) -&gt; VideoItem:MediaBrowser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.item">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MediaBrowser.scrollViewDidEndDecelerating(UIScrollView) -&gt; ():MediaBrowser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "scrollView.zoomScale">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MediaBrowser.setupView() -&gt; ():MediaBrowser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "bounds">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MediaBrowser.scrollViewDidZoom(UIScrollView) -&gt; ():MediaBrowser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "contentView.frame">
+            </PersistentString>
+            <PersistentString
+               value = "scrollView.frame">
+            </PersistentString>
+            <PersistentString
+               value = "mediaItemViews[1].frame">
+            </PersistentString>
+            <PersistentString
+               value = "mediaItemViews[0].frame">
+            </PersistentString>
+            <PersistentString
+               value = "page">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MediaItemView.(load() -&gt; ()).(closure #2).(closure #1):MediaBrowser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.player!.status">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MediaBrowser.layoutSubviews() -&gt; ():MediaBrowser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "frame">
+            </PersistentString>
+            <PersistentString
+               value = "pageView.bounds">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
