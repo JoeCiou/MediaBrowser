@@ -7,24 +7,51 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7C23FD5E1E24A1B5008301A0 /* resident_evil.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C23FD5A1E24A1B5008301A0 /* resident_evil.png */; };
-		7C23FD5F1E24A1B5008301A0 /* resident_evil.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7C23FD5B1E24A1B5008301A0 /* resident_evil.mp4 */; };
-		7C23FD601E24A1B5008301A0 /* star_wars.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C23FD5C1E24A1B5008301A0 /* star_wars.png */; };
-		7C23FD611E24A1B5008301A0 /* star_wars.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7C23FD5D1E24A1B5008301A0 /* star_wars.mp4 */; };
 		7C3FC6B11E2343F5009ADF28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3FC6B01E2343F5009ADF28 /* AppDelegate.swift */; };
 		7C3FC6B31E2343F5009ADF28 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3FC6B21E2343F5009ADF28 /* ViewController.swift */; };
 		7C3FC6B61E2343F5009ADF28 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C3FC6B41E2343F5009ADF28 /* Main.storyboard */; };
 		7C3FC6B81E2343F6009ADF28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C3FC6B71E2343F6009ADF28 /* Assets.xcassets */; };
 		7C3FC6BB1E2343F6009ADF28 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C3FC6B91E2343F6009ADF28 /* LaunchScreen.storyboard */; };
-		7C75F01F1E32055E007F52F6 /* MediaBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C75F0191E30B60A007F52F6 /* MediaBrowser.swift */; };
-		7C75F0211E3215BF007F52F6 /* MediaBrowserImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C75F0201E3215BF007F52F6 /* MediaBrowserImage.xcassets */; };
+		7C5140ED1F31804700263E8A /* resident_evil.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C5140E91F31804700263E8A /* resident_evil.png */; };
+		7C5140EE1F31804700263E8A /* resident_evil.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7C5140EA1F31804700263E8A /* resident_evil.mp4 */; };
+		7C5140EF1F31804700263E8A /* star_wars.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C5140EB1F31804700263E8A /* star_wars.png */; };
+		7C5140F01F31804700263E8A /* star_wars.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7C5140EC1F31804700263E8A /* star_wars.mp4 */; };
+		7C5140F71F3183E100263E8A /* MediaBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C5140F61F31805500263E8A /* MediaBrowser.framework */; };
+		7C5140F81F3183E100263E8A /* MediaBrowser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7C5140F61F31805500263E8A /* MediaBrowser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7C5140F51F31805500263E8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7C5140F11F31805400263E8A /* MediaBrowser.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7C5140D91F317EE400263E8A;
+			remoteInfo = MediaBrowser;
+		};
+		7C5140F91F3183E100263E8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7C5140F11F31805400263E8A /* MediaBrowser.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7C5140D81F317EE400263E8A;
+			remoteInfo = MediaBrowser;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7C5140FB1F3183E100263E8A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7C5140F81F3183E100263E8A /* MediaBrowser.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		7C23FD5A1E24A1B5008301A0 /* resident_evil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = resident_evil.png; path = source/resident_evil.png; sourceTree = "<group>"; };
-		7C23FD5B1E24A1B5008301A0 /* resident_evil.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = resident_evil.mp4; path = source/resident_evil.mp4; sourceTree = "<group>"; };
-		7C23FD5C1E24A1B5008301A0 /* star_wars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = star_wars.png; path = source/star_wars.png; sourceTree = "<group>"; };
-		7C23FD5D1E24A1B5008301A0 /* star_wars.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = star_wars.mp4; path = source/star_wars.mp4; sourceTree = "<group>"; };
 		7C3FC6AD1E2343F5009ADF28 /* MediaBrowser-Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MediaBrowser-Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C3FC6B01E2343F5009ADF28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C3FC6B21E2343F5009ADF28 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -32,8 +59,11 @@
 		7C3FC6B71E2343F6009ADF28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C3FC6BA1E2343F6009ADF28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C3FC6BC1E2343F6009ADF28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7C75F0191E30B60A007F52F6 /* MediaBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaBrowser.swift; path = MediaBrowser/MediaBrowser.swift; sourceTree = "<group>"; };
-		7C75F0201E3215BF007F52F6 /* MediaBrowserImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = MediaBrowserImage.xcassets; path = MediaBrowser/MediaBrowserImage.xcassets; sourceTree = "<group>"; };
+		7C5140E91F31804700263E8A /* resident_evil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = resident_evil.png; sourceTree = "<group>"; };
+		7C5140EA1F31804700263E8A /* resident_evil.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = resident_evil.mp4; sourceTree = "<group>"; };
+		7C5140EB1F31804700263E8A /* star_wars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_wars.png; sourceTree = "<group>"; };
+		7C5140EC1F31804700263E8A /* star_wars.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = star_wars.mp4; sourceTree = "<group>"; };
+		7C5140F11F31805400263E8A /* MediaBrowser.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MediaBrowser.xcodeproj; path = MediaBrowser/MediaBrowser.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C5140F71F3183E100263E8A /* MediaBrowser.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,7 +82,9 @@
 			isa = PBXGroup;
 			children = (
 				7C3FC6AF1E2343F5009ADF28 /* MediaBrowser-Sample */,
+				7C5140E81F31800D00263E8A /* Resources */,
 				7C3FC6AE1E2343F5009ADF28 /* Products */,
+				7C5140F11F31805400263E8A /* MediaBrowser.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,28 +99,34 @@
 		7C3FC6AF1E2343F5009ADF28 /* MediaBrowser-Sample */ = {
 			isa = PBXGroup;
 			children = (
-				7C3FC6C21E234422009ADF28 /* MediaBrowser */,
 				7C3FC6B01E2343F5009ADF28 /* AppDelegate.swift */,
 				7C3FC6B21E2343F5009ADF28 /* ViewController.swift */,
 				7C3FC6B41E2343F5009ADF28 /* Main.storyboard */,
 				7C3FC6B71E2343F6009ADF28 /* Assets.xcassets */,
 				7C3FC6B91E2343F6009ADF28 /* LaunchScreen.storyboard */,
 				7C3FC6BC1E2343F6009ADF28 /* Info.plist */,
-				7C23FD5A1E24A1B5008301A0 /* resident_evil.png */,
-				7C23FD5B1E24A1B5008301A0 /* resident_evil.mp4 */,
-				7C23FD5C1E24A1B5008301A0 /* star_wars.png */,
-				7C23FD5D1E24A1B5008301A0 /* star_wars.mp4 */,
 			);
 			path = "MediaBrowser-Sample";
 			sourceTree = "<group>";
 		};
-		7C3FC6C21E234422009ADF28 /* MediaBrowser */ = {
+		7C5140E81F31800D00263E8A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7C75F0191E30B60A007F52F6 /* MediaBrowser.swift */,
-				7C75F0201E3215BF007F52F6 /* MediaBrowserImage.xcassets */,
+				7C5140E91F31804700263E8A /* resident_evil.png */,
+				7C5140EA1F31804700263E8A /* resident_evil.mp4 */,
+				7C5140EB1F31804700263E8A /* star_wars.png */,
+				7C5140EC1F31804700263E8A /* star_wars.mp4 */,
 			);
-			name = MediaBrowser;
+			name = Resources;
+			path = "MediaBrowser-Sample/Resources";
+			sourceTree = "<group>";
+		};
+		7C5140F21F31805400263E8A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7C5140F61F31805500263E8A /* MediaBrowser.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -100,10 +139,12 @@
 				7C3FC6A91E2343F5009ADF28 /* Sources */,
 				7C3FC6AA1E2343F5009ADF28 /* Frameworks */,
 				7C3FC6AB1E2343F5009ADF28 /* Resources */,
+				7C5140FB1F3183E100263E8A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7C5140FA1F3183E100263E8A /* PBXTargetDependency */,
 			);
 			name = "MediaBrowser-Sample";
 			productName = "MediaBrowser-Sample";
@@ -138,6 +179,12 @@
 			mainGroup = 7C3FC6A41E2343F4009ADF28;
 			productRefGroup = 7C3FC6AE1E2343F5009ADF28 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 7C5140F21F31805400263E8A /* Products */;
+					ProjectRef = 7C5140F11F31805400263E8A /* MediaBrowser.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				7C3FC6AC1E2343F5009ADF28 /* MediaBrowser-Sample */,
@@ -145,19 +192,28 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		7C5140F61F31805500263E8A /* MediaBrowser.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MediaBrowser.framework;
+			remoteRef = 7C5140F51F31805500263E8A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		7C3FC6AB1E2343F5009ADF28 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C5140EF1F31804700263E8A /* star_wars.png in Resources */,
 				7C3FC6BB1E2343F6009ADF28 /* LaunchScreen.storyboard in Resources */,
-				7C23FD611E24A1B5008301A0 /* star_wars.mp4 in Resources */,
-				7C23FD5F1E24A1B5008301A0 /* resident_evil.mp4 in Resources */,
+				7C5140ED1F31804700263E8A /* resident_evil.png in Resources */,
+				7C5140EE1F31804700263E8A /* resident_evil.mp4 in Resources */,
+				7C5140F01F31804700263E8A /* star_wars.mp4 in Resources */,
 				7C3FC6B81E2343F6009ADF28 /* Assets.xcassets in Resources */,
-				7C23FD5E1E24A1B5008301A0 /* resident_evil.png in Resources */,
-				7C75F0211E3215BF007F52F6 /* MediaBrowserImage.xcassets in Resources */,
 				7C3FC6B61E2343F5009ADF28 /* Main.storyboard in Resources */,
-				7C23FD601E24A1B5008301A0 /* star_wars.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,13 +224,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C75F01F1E32055E007F52F6 /* MediaBrowser.swift in Sources */,
 				7C3FC6B31E2343F5009ADF28 /* ViewController.swift in Sources */,
 				7C3FC6B11E2343F5009ADF28 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7C5140FA1F3183E100263E8A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MediaBrowser;
+			targetProxy = 7C5140F91F3183E100263E8A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7C3FC6B41E2343F5009ADF28 /* Main.storyboard */ = {
@@ -290,6 +353,7 @@
 		7C3FC6C01E2343F6009ADF28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AZ5GBDWZ9H;
 				INFOPLIST_FILE = "MediaBrowser-Sample/Info.plist";
@@ -303,6 +367,7 @@
 		7C3FC6C11E2343F6009ADF28 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AZ5GBDWZ9H;
 				INFOPLIST_FILE = "MediaBrowser-Sample/Info.plist";

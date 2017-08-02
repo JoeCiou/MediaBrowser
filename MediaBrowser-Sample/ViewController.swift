@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MediaBrowser
 
 class ViewController: UIViewController {
 
@@ -15,9 +16,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // You can find file to demo
-        let residentEvilVideoItem = VideoItem(image: UIImage(named: "resident_evil")!, videoUrl: URL(fileURLWithPath: Bundle.main.path(forResource: "resident_evil", ofType: "mp4")!))
-        let starWarsVideoItem = VideoItem(image: UIImage(named: "star_wars")!, videoUrl: URL(fileURLWithPath: Bundle.main.path(forResource: "star_wars", ofType: "mp4")!))
+        let residentEvilVideoItem = VideoItem(image: UIImage(named: "resident_evil")!,
+                                              videoUrl: URL(fileURLWithPath: Bundle.main.path(forResource: "resident_evil", ofType: "mp4")!))
+        let starWarsVideoItem = VideoItem(image: UIImage(named: "star_wars")!,
+                                          videoUrl: URL(fileURLWithPath: Bundle.main.path(forResource: "star_wars", ofType: "mp4")!))
 
         let residentEvilImageItem = ImageItem(image: UIImage(named: "resident_evil")!)
         let starWarsImageItem = ImageItem(image: UIImage(named: "star_wars")!)
@@ -29,6 +31,9 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func handleTestButtonClick(_ sender: Any) {
+        browser.setPage(3, animated: true)
+    }
 
 }
 

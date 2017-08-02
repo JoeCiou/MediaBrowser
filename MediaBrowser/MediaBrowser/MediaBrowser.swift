@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class MediaItem: NSObject {
+public class MediaItem: NSObject {
     var image: UIImage?
     var imageUrl: URL?
     
@@ -34,31 +34,31 @@ class MediaItem: NSObject {
     }
 }
 
-class ImageItem: MediaItem {
+public class ImageItem: MediaItem {
     
-    convenience init(image: UIImage){
+    public convenience init(image: UIImage){
         self.init()
         self.image = image
     }
     
-    convenience init(url: URL){
+    public convenience init(url: URL){
         self.init()
         self.imageUrl = url
     }
 
 }
 
-class VideoItem: MediaItem {
+public class VideoItem: MediaItem {
     
-    var item: AVPlayerItem?
+    private(set) var item: AVPlayerItem?
     
-    convenience init(image: UIImage, videoUrl: URL){
+    public convenience init(image: UIImage, videoUrl: URL){
         self.init()
         self.image = image
         self.item = AVPlayerItem(url: videoUrl)
     }
     
-    convenience init(url: URL, videoUrl: URL){
+    public convenience init(url: URL, videoUrl: URL){
         self.init()
         self.imageUrl = url
         self.item = AVPlayerItem(url: videoUrl)
@@ -69,111 +69,130 @@ class MediaItemView: UIView {
     
     var mediaItem: MediaItem?{
         didSet{
-            setupView()
+            if mediaItem is VideoItem && playerView == nil{
+                playerView = UIView()
+                playerView!.frame = bounds
+                playerView!.alpha = 0
+                addSubview(playerView!)
+                
+                playerLayer = AVPlayerLayer()
+                playerLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
+                playerView!.layer.addSublayer(playerLayer!)
+            }
+            
+            completedPreload = false
+            if player != nil && player.rate == 1{
+                stop()
+            }
         }
     }
-    var player: AVPlayer?{
+    
+    var player: AVPlayer!{
         didSet{
-            playerLayer = AVPlayerLayer(player: player!)
-            playerLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-            playerView.layer.addSublayer(playerLayer!)
+            playerLayer?.player = player
         }
     }
-    var isCompletePreload = false
-    let contentView = UIView()
+    
+    private(set) var completedPreload = false
+    
     private let imageView = UIImageView()
-    private let playerView = UIView()
+    private var playerView: UIView?
     private var playerLayer: AVPlayerLayer?
     private var loadingView = LoadingView()
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func layoutSubviews(){
         super.layoutSubviews()
+        playerView?.frame = bounds
         playerLayer?.frame = bounds
     }
     
-    func setupView(){
-        self.addSubview(contentView)
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        let hContentViewConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[contentView]|", options: .directionLeadingToTrailing, metrics: nil, views: ["contentView": contentView])
-        let vContentViewConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[contentView]|", options: .directionLeadingToTrailing, metrics: nil, views: ["contentView": contentView])
-        self.addConstraints(hContentViewConstraints)
-        self.addConstraints(vContentViewConstraints)
-        
-        contentView.addSubview(imageView)
+    private func setupView(){
+        addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         let hImageViewConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[imageView]|", options: .directionLeadingToTrailing, metrics: nil, views: ["imageView": imageView])
         let vImageViewConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[imageView]|", options: .directionLeadingToTrailing, metrics: nil, views: ["imageView": imageView])
-        contentView.addConstraints(hImageViewConstraints)
-        contentView.addConstraints(vImageViewConstraints)
+        addConstraints(hImageViewConstraints)
+        addConstraints(vImageViewConstraints)
         
-        contentView.addSubview(loadingView)
+        addSubview(loadingView)
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         let wLoadingViewConstraint = NSLayoutConstraint(item: loadingView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
         let hLoadingViewConstraint = NSLayoutConstraint(item: loadingView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
-        let cxLoadingViewConstraint = NSLayoutConstraint(item: loadingView, attribute: .centerX, relatedBy: .equal, toItem: contentView, attribute: .centerX, multiplier: 1, constant: 0)
-        let cyLoadingViewConstraint = NSLayoutConstraint(item: loadingView, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: 0)
-        contentView.addConstraint(wLoadingViewConstraint)
-        contentView.addConstraint(hLoadingViewConstraint)
-        contentView.addConstraint(cxLoadingViewConstraint)
-        contentView.addConstraint(cyLoadingViewConstraint)
+        let cxLoadingViewConstraint = NSLayoutConstraint(item: loadingView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
+        let cyLoadingViewConstraint = NSLayoutConstraint(item: loadingView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)
+        addConstraint(wLoadingViewConstraint)
+        addConstraint(hLoadingViewConstraint)
+        addConstraint(cxLoadingViewConstraint)
+        addConstraint(cyLoadingViewConstraint)
         
         loadingView.start()
-        
-        if mediaItem is VideoItem{
-            playerView.frame = bounds
-            contentView.addSubview(playerView)
-            playerView.alpha = 0
-        }
     }
     
     func preload(){
         mediaItem?.loadImage(completeHandler: { (image) in
             self.loadingView.end()
             self.imageView.image = image
-            self.isCompletePreload = true
+            self.completedPreload = true
         })
     }
     
     func load(){
         if let videoItem = mediaItem as? VideoItem{
             player?.replaceCurrentItem(with: videoItem.item)
-            if isCompletePreload{
+            if completedPreload{
                 UIView.animate(withDuration: 0.5, delay: 2, options: .layoutSubviews, animations: {
-                    self.playerView.alpha = 1
+                    self.playerView?.alpha = 1
                     self.player?.play()
                 }, completion: nil)
             }else{
-                let timer = Timer(timeInterval: 0.1, repeats: true, block: { (timer) in
-                    if self.isCompletePreload{
-                        timer.invalidate()
-                        if self.player!.status == .readyToPlay{
-                            UIView.animate(withDuration: 0.5, delay: 2, options: .layoutSubviews, animations: {
-                                self.playerView.alpha = 1
-                                self.player?.play()
-                            }, completion: nil)
-                        }
-                    }
-                })
+                let timer = Timer(timeInterval: 0.1, target: self, selector: #selector(self.loadTimerHandler(_:)), userInfo: nil, repeats: true)
                 RunLoop.current.add(timer, forMode: .defaultRunLoopMode)
+            }
+        }
+    }
+    
+    func loadTimerHandler(_ timer: Timer){
+        if self.completedPreload{
+            timer.invalidate()
+            if self.player!.status == .readyToPlay{
+                UIView.animate(withDuration: 0.5, delay: 2, options: .layoutSubviews, animations: {
+                    self.playerView?.alpha = 1
+                    self.player?.play()
+                }, completion: nil)
             }
         }
     }
     
     func restore(){
         player?.pause()
-        self.playerView.alpha = 0
+        self.playerView?.alpha = 0
+    }
+    
+    func stop(){
+        restore()
+        player.seek(to: kCMTimeZero)
     }
     
 }
 
-class MediaBrowser: UIView, UIScrollViewDelegate {
+public class MediaBrowser: UIView, UIScrollViewDelegate {
     
-    var mediaItems: [MediaItem] = []{
+    public var mediaItems: [MediaItem] = []{
         didSet{
             setupItemView()
         }
     }
-    var showPage = true
+    
+    public var showPage = true
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -182,29 +201,37 @@ class MediaBrowser: UIView, UIScrollViewDelegate {
     private let gradientLayer = CAGradientLayer()
     private let player = AVPlayer()
     private var mediaItemViews: [MediaItemView] = []
-    private var page: Int = 0{
+    
+    public private(set) var currentPage: Int = 0{
         didSet{
-            pageLabel.text = "\(page+1)/\(mediaItems.count)"
+            pageLabel.text = "\(currentPage + 1)/\(mediaItems.count)"
         }
     }
-    private var isCompleteAnimationWithShowPage = true
     
-    override init(frame: CGRect) {
+    private var completedPageAnimation = true
+    
+    override public init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
+        setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupView()
+        setup()
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = pageView.bounds
     }
     
-    func setupView(){
+    private func setup(){
+        setupScrollView()
+        setupContentView()
+        setupPageView()
+    }
+    
+    private func setupScrollView(){
         scrollView.frame = bounds
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.alwaysBounceHorizontal = true
@@ -219,8 +246,9 @@ class MediaBrowser: UIView, UIScrollViewDelegate {
         let vScrollViewConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollView]|", options: .directionLeadingToTrailing, metrics: nil, views: ["scrollView":scrollView])
         self.addConstraints(hScrollViewConstraints)
         self.addConstraints(vScrollViewConstraints)
-        
-        
+    }
+    
+    private func setupContentView(){
         contentView.frame = bounds
         contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
@@ -235,8 +263,9 @@ class MediaBrowser: UIView, UIScrollViewDelegate {
         self.addConstraint(heightEqualConstraint)
         scrollView.addConstraints(hContentViewConstraints)
         scrollView.addConstraints(vContentViewConstraints)
-        
-        
+    }
+    
+    private func setupPageView(){
         pageView.translatesAutoresizingMaskIntoConstraints = false
         pageView.alpha = 0
         self.addSubview(pageView)
@@ -264,7 +293,7 @@ class MediaBrowser: UIView, UIScrollViewDelegate {
         pageView.addConstraints(vPageLabelconstraints)
     }
     
-    func setupItemView(){
+    private func setupItemView(){
         mediaItemViews = []
         for view in contentView.subviews{
             view.removeFromSuperview()
@@ -295,30 +324,38 @@ class MediaBrowser: UIView, UIScrollViewDelegate {
             index += 1
         }
         hConstraintsFormat += "|"
-        print(hConstraintsFormat)
+        
         let hConstraints = NSLayoutConstraint.constraints(withVisualFormat: hConstraintsFormat, options: .directionLeadingToTrailing, metrics: nil, views: hConstraintsViews)
         self.addConstraints(hConstraints)
         
-        page = 0
+        currentPage = 0
         checkPage()
     }
     
-    func checkPage(){
-        if mediaItemViews[page].isCompletePreload == false{
-            mediaItemViews[page].preload()
+//    public func addMediaItems(_ items: [MediaItem]){
+//        
+//    }
+//    
+//    public func addMediaItem(_ item: MediaItem){
+//        addMediaItems([item])
+//    }
+    
+    private func checkPage(){
+        if mediaItemViews[currentPage].completedPreload == false{
+            mediaItemViews[currentPage].preload()
         }
-        mediaItemViews[page].load()
+        mediaItemViews[currentPage].load()
         
-        if page - 1 >= 0{
-            mediaItemViews[page - 1].preload()
+        if currentPage - 1 >= 0{
+            mediaItemViews[currentPage - 1].preload()
         }
-        if page + 1 < mediaItemViews.count{
-            mediaItemViews[page + 1].preload()
+        if currentPage + 1 < mediaItemViews.count{
+            mediaItemViews[currentPage + 1].preload()
         }
     }
     
-    func showPageNumbers(){
-        if isCompleteAnimationWithShowPage == false{
+    private func showPageNumbers(){
+        if completedPageAnimation == false{
             self.pageView.alpha = 1
         }
         UIView.animate(withDuration: 0.3) {
@@ -326,34 +363,54 @@ class MediaBrowser: UIView, UIScrollViewDelegate {
         }
     }
     
-    func hidePageNumbers(){
-        isCompleteAnimationWithShowPage = false
+    private func hidePageNumbers(){
+        completedPageAnimation = false
         UIView.animate(withDuration: 0.3, delay: 1, options: .layoutSubviews, animations: { 
             self.pageView.alpha = 0
         }) { (_) in
-            self.isCompleteAnimationWithShowPage = true
+            self.completedPageAnimation = true
         }
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.zoomScale == 1{
-            let newPage = lroundf(Float(scrollView.contentOffset.x / scrollView.frame.width))
-            if page != newPage && newPage >= 0 && newPage < mediaItemViews.count{
-                page = newPage
-            }
-        }
-    }
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    public func setPage(_ page: Int, animated: Bool){
+        scrollView.setContentOffset(CGPoint(x: CGFloat(page) * scrollView.bounds.width, y: 0),
+                                    animated: animated)
         if mediaItemViews.count > 0 && scrollView.zoomScale == 1{
-            mediaItemViews[page].restore()
+            mediaItemViews[currentPage].stop()
             if showPage{
                 showPageNumbers()
             }
         }
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.zoomScale == 1{
+            let newPage = lroundf(Float(scrollView.contentOffset.x / scrollView.frame.width))
+            if currentPage != newPage && newPage >= 0 && newPage < mediaItemViews.count{
+                currentPage = newPage
+            }
+        }
+    }
+    
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if mediaItemViews.count > 0 && scrollView.zoomScale == 1{
+            mediaItemViews[currentPage].stop()
+            if showPage{
+                showPageNumbers()
+            }
+        }
+    }
+    
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if mediaItemViews.count > 0 && scrollView.zoomScale == 1{
+            checkPage()
+            if showPage{
+                hidePageNumbers()
+            }
+        }
+    }
+    
+    public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         if mediaItemViews.count > 0{
             checkPage()
             if showPage{
@@ -362,18 +419,36 @@ class MediaBrowser: UIView, UIScrollViewDelegate {
         }
     }
     
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+    public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return contentView
     }
     
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+    public func scrollViewDidZoom(_ scrollView: UIScrollView) {
         if scrollView.zoomScale != 1{
             scrollView.isPagingEnabled = false
-            scrollView.contentSize = CGSize(width: frame.size.width * scrollView.zoomScale * CGFloat(page + 1), height: frame.size.height * scrollView.zoomScale)
-            scrollView.contentInset = UIEdgeInsetsMake(0, -frame.size.width *  scrollView.zoomScale * CGFloat(page), 0, 0)
+            scrollView.contentSize = CGSize(width: frame.size.width * scrollView.zoomScale * CGFloat(currentPage + 1), height: frame.size.height * scrollView.zoomScale)
+            scrollView.contentInset = UIEdgeInsetsMake(0, -frame.size.width *  scrollView.zoomScale * CGFloat(currentPage), 0, 0)
+            
+            mediaItemViews[currentPage].stop()
+            
+            if currentPage - 1 >= 0{
+                mediaItemViews[currentPage - 1].isHidden = true
+            }
+            if currentPage + 1 < mediaItemViews.count{
+                mediaItemViews[currentPage + 1].isHidden = true
+            }
         }else{
             scrollView.isPagingEnabled = true
             scrollView.contentInset = UIEdgeInsets.zero
+            
+            mediaItemViews[currentPage].load()
+            
+            if currentPage - 1 >= 0{
+                mediaItemViews[currentPage - 1].isHidden = false
+            }
+            if currentPage + 1 < mediaItemViews.count{
+                mediaItemViews[currentPage + 1].isHidden = false
+            }
         }
     }
 }
@@ -406,7 +481,7 @@ class LoadingView: UIImageView{
             
         }else{
             let animation = CABasicAnimation(keyPath: "transform.rotation.z")
-            animation.toValue = M_PI*2
+            animation.toValue = Double.pi * 2
             animation.duration = 0.5
             animation.isCumulative = true
             animation.repeatCount = Float(CGFloat.greatestFiniteMagnitude)
