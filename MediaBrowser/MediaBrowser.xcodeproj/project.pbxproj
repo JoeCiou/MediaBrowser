@@ -10,6 +10,7 @@
 		7C5140DE1F317EE400263E8A /* MediaBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C5140DC1F317EE400263E8A /* MediaBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7C5140E61F317F8700263E8A /* MediaBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5140E41F317F8700263E8A /* MediaBrowser.swift */; };
 		7C5140E71F317F8700263E8A /* MediaBrowserImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C5140E51F317F8700263E8A /* MediaBrowserImage.xcassets */; };
+		7C5140FD1F32C4C000263E8A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5140FC1F32C4C000263E8A /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +19,7 @@
 		7C5140DD1F317EE400263E8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C5140E41F317F8700263E8A /* MediaBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaBrowser.swift; sourceTree = "<group>"; };
 		7C5140E51F317F8700263E8A /* MediaBrowserImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MediaBrowserImage.xcassets; sourceTree = "<group>"; };
+		7C5140FC1F32C4C000263E8A /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 			children = (
 				7C5140DC1F317EE400263E8A /* MediaBrowser.h */,
 				7C5140E41F317F8700263E8A /* MediaBrowser.swift */,
+				7C5140FC1F32C4C000263E8A /* LoadingView.swift */,
 				7C5140E51F317F8700263E8A /* MediaBrowserImage.xcassets */,
 				7C5140DD1F317EE400263E8A /* Info.plist */,
 			);
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C5140E61F317F8700263E8A /* MediaBrowser.swift in Sources */,
+				7C5140FD1F32C4C000263E8A /* LoadingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +314,7 @@
 				7C5140E31F317EE400263E8A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

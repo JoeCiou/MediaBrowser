@@ -23,7 +23,9 @@ class ViewController: UIViewController {
 
         let residentEvilImageItem = ImageItem(image: UIImage(named: "resident_evil")!)
         let starWarsImageItem = ImageItem(image: UIImage(named: "star_wars")!)
+        
         browser.mediaItems = [residentEvilVideoItem, starWarsVideoItem, residentEvilImageItem, starWarsImageItem]
+        browser.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,9 +33,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func handleTestButtonClick(_ sender: Any) {
-        browser.setPage(3, animated: true)
-    }
-
 }
 
+
+extension ViewController: MediaBrowserDelegate{
+    func mediaBrowser(_ browser: MediaBrowser, willMoving page: Int) {
+        print(page)
+    }
+}
